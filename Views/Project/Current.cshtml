@@ -1,0 +1,35 @@
+@model mvc.Models.DbModels.Project
+
+@functions{
+    string GetState()
+    {
+        switch(Model.State)
+        {
+            case mvc.Models.DbModels.ProjectState.IDEA:
+                return "Идея проекта готова";
+            case mvc.Models.DbModels.ProjectState.INPROGRESS:
+                return "В процессе реализации";
+            case mvc.Models.DbModels.ProjectState.HOLD:
+                return "Заморожен";
+            case mvc.Models.DbModels.ProjectState.CANCELED:
+                return "Отменён";
+            case mvc.Models.DbModels.ProjectState.DONE:
+                return "Закончен";
+            default:
+                return "Неизвестно";            
+        }
+    }
+
+    string GetUsername()
+    {
+        return Model?.User?.Username ?? User?.Identity?.Name;  
+    }
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome, @Model.Name</h1>
+    <p>@Model.Description</p>
+    <p>@GetState()</p>
+    <p>@GetUsername()</p>
+    <p></p>
+</div>
